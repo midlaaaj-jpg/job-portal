@@ -1,0 +1,192 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Employee Dashboard | Hireo</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+</head>
+
+<body class="employee-dashboard-page">
+
+
+<!-- NAVBAR -->
+<nav class="employee-navbar">
+
+    <a href="{% url 'home' %}" class="employee-logo">
+        hireo<span>.</span>
+    </a>
+
+    <div class="employee-nav-links">
+        <a href="{% url 'job_list' %}">Find Jobs</a>
+        <a href="{% url 'my_applications' %}">My Applications</a>
+        <a href="{% url 'logout' %}" class="employee-logout">Logout</a>
+    </div>
+
+</nav>
+
+
+<!-- WELCOME SECTION -->
+<section class="employee-welcome">
+
+    <div class="employee-welcome-content">
+
+        <span class="employee-tag">EMPLOYEE DASHBOARD</span>
+
+        <h1>
+            Welcome back,<br>
+            {{ request.user.username }}!
+        </h1>
+
+        <p>
+            Your next career opportunity could be just one click away.
+            Explore jobs and take the next step in your career.
+        </p>
+
+        <a href="{% url 'job_list' %}" class="employee-primary-btn">
+            Explore Jobs →
+        </a>
+
+    </div>
+
+    <div class="employee-welcome-decoration">
+        <div class="employee-circle">
+            <span>H</span>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD CONTENT -->
+<main class="employee-main">
+
+    <div class="employee-section-heading">
+        <div>
+            <span>YOUR WORKSPACE</span>
+            <h2>Manage Your Career</h2>
+        </div>
+    </div>
+
+
+    <!-- ACTION CARDS -->
+    <div class="employee-card-grid">
+
+
+        <!-- PROFILE CARD -->
+        <div class="employee-action-card">
+
+            <div class="employee-card-icon profile-icon">
+                👤
+            </div>
+
+            <span class="employee-card-number">01</span>
+
+            <h3>My Profile</h3>
+
+            <p>
+                Create and manage your professional profile.
+                Let companies discover your skills and experience.
+            </p>
+
+            <a href="{% url 'create_profile' %}">
+                Manage Profile →
+            </a>
+
+        </div>
+
+
+        <!-- JOBS CARD -->
+        <div class="employee-action-card employee-highlight-card">
+
+            <div class="employee-card-icon jobs-icon">
+                💼
+            </div>
+
+            <span class="employee-card-number">02</span>
+
+            <h3>Explore Jobs</h3>
+
+            <p>
+                Discover available opportunities and find
+                the right position for your career goals.
+            </p>
+
+            <a href="{% url 'job_list' %}">
+                Browse Jobs →
+            </a>
+
+        </div>
+
+
+        <!-- APPLICATIONS CARD -->
+        <div class="employee-action-card">
+
+            <div class="employee-card-icon application-icon">
+                📄
+            </div>
+
+            <span class="employee-card-number">03</span>
+
+            <h3>My Applications</h3>
+
+            <p>
+                Keep track of the jobs you've applied for
+                and check your application progress.
+            </p>
+
+            <a href="{% url 'my_applications' %}">
+                View Applications →
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- CTA SECTION -->
+    <section class="employee-cta">
+
+        <div>
+            <span>YOUR FUTURE STARTS HERE</span>
+
+            <h2>Ready for your next opportunity?</h2>
+
+            <p>
+                Take the next step towards building
+                the career you've always wanted.
+            </p>
+        </div>
+
+        <a href="{% url 'job_list' %}">
+            Find Your Job →
+        </a>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="employee-footer">
+
+    <h2>hireo<span>.</span></h2>
+
+    <p>Find your place. Build your future.</p>
+
+    <small>© 2026 Hireo. All rights reserved.</small>
+
+</footer>
+
+
+</body>
+</html>

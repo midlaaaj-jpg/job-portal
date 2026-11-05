@@ -1,0 +1,183 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hireo | My Posted Jobs</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="myjobs-layout">
+
+    <!-- Sidebar -->
+    <aside class="myjobs-sidebar">
+
+        <div class="myjobs-logo">
+            <span>✦</span> Hireo
+        </div>
+
+        <p class="myjobs-menu-label">WORKSPACE</p>
+
+        <nav class="myjobs-nav">
+            <a href="{% url 'create_job' %}">＋ Post a Job</a>
+            <a href="{% url 'company_jobs' %}" class="active">▤ My Posted Jobs</a>
+            <a href="{% url 'company_applicants' %}">♙ Applicants</a>
+            <a href="{% url 'create_company_profile' %}">◉ Company Profile</a>
+        </nav>
+
+        <div class="myjobs-sidebar-bottom">
+            <p>Manage your opportunities and find great talent.</p>
+            <a href="{% url 'logout' %}">↪ Logout</a>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="myjobs-main">
+
+        <header class="myjobs-topbar">
+            <div>
+                <p>COMPANY WORKSPACE</p>
+                <h2>My Posted Jobs</h2>
+            </div>
+
+            <a href="{% url 'create_job' %}" class="myjobs-add-btn">
+                + Post New Job
+            </a>
+        </header>
+
+
+        <!-- Heading -->
+        <section class="myjobs-hero">
+
+            <div>
+                <p class="myjobs-eyebrow">YOUR HIRING ACTIVITY</p>
+
+                <h1>Manage Your <span>Opportunities.</span></h1>
+
+                <p>
+                    Keep track of your job openings and manage
+                    your hiring opportunities in one place.
+                </p>
+            </div>
+
+            <div class="myjobs-hero-icon">▤</div>
+
+        </section>
+
+
+        <!-- Job Listings -->
+        <section class="myjobs-section">
+
+            <div class="myjobs-section-heading">
+                <div>
+                    <p>JOB MANAGEMENT</p>
+                    <h2>Your Job Listings</h2>
+                </div>
+            </div>
+
+
+            <div class="myjobs-list">
+
+                {% for job in jobs %}
+
+                    <article class="myjobs-card">
+
+                        <div class="myjobs-card-top">
+
+                            <div class="myjobs-job-icon">
+                                ✦
+                            </div>
+
+                            <div class="myjobs-job-info">
+                                <h3>{{ job.title }}</h3>
+                                <p>📍 {{ job.location }}</p>
+                            </div>
+
+                            {% if job.is_active %}
+    <span class="myjobs-status">Posted</span>
+{% else %}
+    <span class="myjobs-status closed-status">Closed</span>
+{% endif %}
+
+                        </div>
+
+
+                        <div class="myjobs-description">
+                            <p>{{ job.description }}</p>
+                        </div>
+
+
+                        <div class="myjobs-details">
+
+                            <div>
+                                <span>Salary</span>
+                                <strong>{{ job.salary }}</strong>
+                            </div>
+
+                        </div>
+
+
+                        <div class="myjobs-actions">
+
+                            <a href="{% url 'edit_job' job.id %}"
+                               class="myjobs-edit-btn">
+                                ✎ Edit Job
+                            </a>
+
+                            {% if job.is_active %}
+    <form method="POST" action="{% url 'close_job' job.id %}">
+        {% csrf_token %}
+        <button type="submit">Close Job</button>
+    </form>
+{% endif %}
+
+                        </div>
+
+                    </article>
+
+                {% empty %}
+
+                    <div class="myjobs-empty">
+
+                        <div class="myjobs-empty-icon">▤</div>
+
+                        <h2>No Jobs Posted Yet</h2>
+
+                        <p>
+                            You haven't posted any jobs.
+                            Start by creating your first opportunity.
+                        </p>
+
+                        <a href="{% url 'create_job' %}">
+                            + Create Your First Job
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="myjobs-footer">
+            <p>© 2026 Hireo. All rights reserved.</p>
+            <p>Connecting talent with opportunity.</p>
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>

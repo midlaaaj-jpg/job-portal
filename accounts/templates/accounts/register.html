@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Hireo</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="register-page">
+
+    <div class="register-container">
+
+        <div class="register-brand">
+            <a href="{% url 'home' %}" class="register-logo">
+                Hire<span>o</span>.
+            </a>
+            <p>Your next opportunity starts here.</p>
+        </div>
+
+        <div class="register-card">
+
+            <div class="register-heading">
+                <span class="register-tag">JOIN HI​​REO</span>
+                <h1>Create Your <span>Account</span></h1>
+                <p>Join Hireo and take the next step in your career.</p>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="register-message">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" class="register-form">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="register-button">
+                    Create Account
+                    <span>→</span>
+                </button>
+            </form>
+
+            <div class="register-login">
+                Already have an account?
+                <a href="{% url 'login' %}">Login here</a>
+            </div>
+
+        </div>
+
+        <div class="register-footer">
+            © 2026 Hireo. Build your future with us.
+        </div>
+
+    </div>
+
+</body>
+</html>

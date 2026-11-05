@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ profile.company_name }} | Hireo</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="company-view-page">
+
+    <div class="company-view-container">
+
+        <a href="{% url 'company_dashboard' %}" class="company-view-back">
+            ← Back to Dashboard
+        </a>
+
+        <div class="company-view-card">
+
+            <div class="company-view-header">
+
+                <div class="company-view-logo">
+                    {% if profile.logo %}
+                        <img src="{{ profile.logo.url }}" alt="{{ profile.company_name }}">
+                    {% else %}
+                        <span>{{ profile.company_name|first|upper }}</span>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <span class="company-view-tag">COMPANY PROFILE</span>
+
+                    <h1>{{ profile.company_name }}</h1>
+
+                    <p>{{ profile.industry }} · {{ profile.location }}</p>
+                </div>
+
+            </div>
+
+            <div class="company-view-divider"></div>
+
+            <section class="company-view-about">
+                <h2>About Company</h2>
+                <p>{{ profile.description }}</p>
+            </section>
+
+            <div class="company-view-details">
+
+                <div class="company-view-info">
+                    <span>📍 Location</span>
+                    <h3>{{ profile.location }}</h3>
+                </div>
+
+                <div class="company-view-info">
+                    <span>🏢 Industry</span>
+                    <h3>{{ profile.industry }}</h3>
+                </div>
+
+                <div class="company-view-info">
+                    <span>📞 Contact</span>
+                    <h3>{{ profile.contact }}</h3>
+                </div>
+
+                <div class="company-view-info">
+                    <span>🌐 Website</span>
+                    <h3>
+                        <a href="{{ profile.website }}" target="_blank">
+                            Visit Website ↗
+                        </a>
+                    </h3>
+                </div>
+
+            </div>
+
+            <div class="company-view-actions">
+
+                <a href="{% url 'create_company_profile' %}" class="company-view-edit">
+                    Edit Company Profile →
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

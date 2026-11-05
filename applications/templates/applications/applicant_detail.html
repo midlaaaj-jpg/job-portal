@@ -1,0 +1,105 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicant Details | Hireo</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="applicant-detail-page">
+
+    <div class="applicant-detail-container">
+
+        <a href="{% url 'company_applicants' %}" class="applicant-back">
+            ← Back to Applicants
+        </a>
+
+        <div class="applicant-detail-card">
+
+            <div class="applicant-detail-header">
+
+                <div class="applicant-detail-avatar">
+                    {{ employee.full_name|first|upper }}
+                </div>
+
+                <div>
+                    <span class="applicant-detail-label">APPLICANT PROFILE</span>
+                    <h1>{{ employee.full_name }}</h1>
+                    <p>{{ employee.location }}</p>
+                </div>
+
+            </div>
+
+            <div class="applicant-detail-divider"></div>
+
+            <h2>Personal Information</h2>
+
+            <div class="applicant-info-grid">
+
+                <div class="applicant-info-item">
+                    <span>Contact</span>
+                    <p>{{ employee.contact }}</p>
+                </div>
+
+                <div class="applicant-info-item">
+                    <span>Location</span>
+                    <p>{{ employee.location }}</p>
+                </div>
+
+                <div class="applicant-info-item">
+                    <span>Education</span>
+                    <p>{{ employee.education }}</p>
+                </div>
+
+                <div class="applicant-info-item">
+                    <span>Experience</span>
+                    <p>{{ employee.experience }}</p>
+                </div>
+
+            </div>
+
+            <div class="applicant-detail-divider"></div>
+
+            <h2>Skills & Expertise</h2>
+
+            <div class="applicant-skills">
+                {{ employee.skills|default:"No skills provided." }}
+            </div>
+
+            <div class="applicant-detail-divider"></div>
+
+            <h2>Resume</h2>
+
+            {% if employee.resume %}
+
+                <div class="applicant-resume-box">
+                    <div>
+                        <strong>Resume Available</strong>
+                        <p>View the applicant's uploaded resume.</p>
+                    </div>
+
+                    <a href="{{ employee.resume.url }}"
+                       target="_blank"
+                       class="applicant-resume-btn">
+                        View Resume ↗
+                    </a>
+                </div>
+
+            {% else %}
+
+                <p class="applicant-no-resume">
+                    No resume uploaded.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+</html>

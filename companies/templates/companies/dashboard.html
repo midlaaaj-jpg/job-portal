@@ -1,0 +1,265 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Hireo | Company Dashboard</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="logo">
+        <span>✦</span> Hireo
+    </div>
+
+    <p class="menu-label">WORKSPACE</p>
+
+    <nav class="sidebar-nav">
+
+        <a href="#" class="active">▦ Dashboard</a>
+
+        <a href="{% url 'create_job' %}">＋ Post a Job</a>
+
+        <a href="{% url 'company_jobs' %}">▤ My Posted Jobs</a>
+
+        <a href="{% url 'company_applicants' %}">♙ Applicants</a>
+
+        <!-- Updated Company Profile Link -->
+        <a href="{% url 'company_profile_view' %}">◉ Company Profile</a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <p>Manage your hiring journey with Hireo.</p>
+
+        <a href="{% url 'logout' %}" class="logout-btn">
+            ↪ Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+
+        <div>
+            <p class="top-label">COMPANY WORKSPACE</p>
+            <h2>Dashboard</h2>
+        </div>
+
+        <div class="user-info">
+
+            <div class="user-avatar">
+                {{ request.user.username|first|upper }}
+            </div>
+
+            <div>
+                <h4>{{ request.user.username }}</h4>
+                <p>Company Account</p>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- WELCOME SECTION -->
+    <section class="welcome-section">
+
+        <div>
+            <p class="welcome-label">WELCOME BACK 👋</p>
+
+            <h1>Hello, {{ request.user.username }}!</h1>
+
+            <p>
+                Manage your job postings, discover talented candidates
+                and grow your team with Hireo.
+            </p>
+        </div>
+
+        <a href="{% url 'create_job' %}" class="primary-btn">
+            + Post a New Job
+        </a>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">▤</div>
+
+            <p>Job Management</p>
+
+            <h3>My Posted Jobs</h3>
+
+            <a href="{% url 'company_jobs' %}">
+                Manage Jobs →
+            </a>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">♙</div>
+
+            <p>Candidate Management</p>
+
+            <h3>Applicants</h3>
+
+            <a href="{% url 'company_applicants' %}">
+                View Applicants →
+            </a>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">◉</div>
+
+            <p>Company Information</p>
+
+            <h3>Company Profile</h3>
+
+            <!-- Updated Profile Link -->
+            <a href="{% url 'company_profile_view' %}">
+                View Profile →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUICK ACTIONS -->
+    <section class="content-section">
+
+        <div class="section-heading">
+
+            <div>
+                <p>QUICK ACCESS</p>
+                <h2>Manage Your Workspace</h2>
+            </div>
+
+        </div>
+
+
+        <div class="action-grid">
+
+            <a href="{% url 'create_job' %}" class="action-card">
+
+                <span class="action-icon">＋</span>
+
+                <h3>Post a New Job</h3>
+
+                <p>
+                    Create a job opening and find the right
+                    candidates for your company.
+                </p>
+
+                <span class="action-link">Get Started ↗</span>
+
+            </a>
+
+
+            <a href="{% url 'company_jobs' %}" class="action-card">
+
+                <span class="action-icon">▤</span>
+
+                <h3>Manage Job Listings</h3>
+
+                <p>
+                    View and manage all the job opportunities
+                    posted by your company.
+                </p>
+
+                <span class="action-link">View Jobs ↗</span>
+
+            </a>
+
+
+            <a href="{% url 'company_applicants' %}" class="action-card">
+
+                <span class="action-icon">♙</span>
+
+                <h3>Review Applicants</h3>
+
+                <p>
+                    Explore candidates who have applied
+                    for your job opportunities.
+                </p>
+
+                <span class="action-link">View Candidates ↗</span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM BANNER -->
+    <section class="dashboard-banner">
+
+        <div>
+
+            <p>BUILD YOUR DREAM TEAM</p>
+
+            <h2>
+                Great talent starts with<br>
+                the right opportunity.
+            </h2>
+
+            <p>
+                Find talented professionals and take your company
+                to the next level.
+            </p>
+
+        </div>
+
+        <a href="{% url 'create_job' %}">
+            Post a Job ↗
+        </a>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="dashboard-footer">
+
+        <p>© 2026 Hireo. All rights reserved.</p>
+
+        <p>Connecting talent with opportunity.</p>
+
+    </footer>
+
+</main>
+
+</div>
+
+</body>
+</html>

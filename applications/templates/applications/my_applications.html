@@ -1,0 +1,167 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>My Applications | Hireo</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+</head>
+
+<body class="my-applications-page">
+
+
+<!-- NAVBAR -->
+<nav class="my-app-navbar">
+
+    <a href="{% url 'home' %}" class="my-app-logo">
+        hireo<span>.</span>
+    </a>
+
+    <div class="my-app-nav-links">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'job_list' %}">Find Jobs</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+<section class="my-app-hero">
+
+    <span>YOUR CAREER JOURNEY</span>
+
+    <h1>My Applications</h1>
+
+    <p>
+        Track your job applications and stay updated
+        on your career opportunities.
+    </p>
+
+</section>
+
+
+<!-- APPLICATIONS -->
+<main class="my-app-container">
+
+    <div class="my-app-heading">
+        <div>
+            <span>APPLICATION TRACKER</span>
+            <h2>Your Applied Jobs</h2>
+        </div>
+
+        <a href="{% url 'job_list' %}">
+            + Explore More Jobs
+        </a>
+    </div>
+
+
+    <div class="my-app-grid">
+
+        {% for application in applications %}
+
+            <div class="my-app-card">
+
+                <div class="my-app-card-top">
+
+                    <div class="my-app-icon">
+                        💼
+                    </div>
+
+                    <span class="my-app-status
+                        {% if application.status == 'shortlisted' %}
+                            status-shortlisted
+                        {% elif application.status == 'rejected' %}
+                            status-rejected
+                        {% elif application.status == 'hired' %}
+                            status-hired
+                        {% else %}
+                            status-pending
+                        {% endif %}
+                    ">
+                        {{ application.status }}
+                    </span>
+
+                </div>
+
+
+                <h3>{{ application.job.title }}</h3>
+
+                <div class="my-app-info">
+
+                    <p>
+                        <span>📍</span>
+                        {{ application.job.location }}
+                    </p>
+
+                    <p>
+                        <span>💰</span>
+                        {{ application.job.salary }}
+                    </p>
+
+                </div>
+
+
+                <div class="my-app-divider"></div>
+
+
+                <div class="my-app-card-bottom">
+
+                    <span>APPLICATION STATUS</span>
+
+                    <strong>{{ application.status|title }}</strong>
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="my-app-empty">
+
+                <div>📄</div>
+
+                <h2>No Applications Yet</h2>
+
+                <p>
+                    You haven't applied for any jobs yet.
+                    Start exploring opportunities and take
+                    the next step in your career.
+                </p>
+
+                <a href="{% url 'job_list' %}">
+                    Explore Available Jobs →
+                </a>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="my-app-footer">
+
+    <h2>hireo<span>.</span></h2>
+
+    <p>Find your place. Build your future.</p>
+
+    <small>© 2026 Hireo. All rights reserved.</small>
+
+</footer>
+
+
+</body>
+</html>

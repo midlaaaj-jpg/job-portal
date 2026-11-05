@@ -1,0 +1,153 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>{{ job.title }} | Hireo</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+</head>
+
+<body class="job-detail-page">
+
+
+<!-- NAVBAR -->
+<nav class="job-detail-navbar">
+
+    <a href="{% url 'home' %}" class="job-detail-logo">
+        hireo<span>.</span>
+    </a>
+
+    <div class="job-detail-nav-links">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'job_list' %}">Find Jobs</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+</nav>
+
+
+<!-- JOB HEADER -->
+<section class="job-detail-hero">
+
+    <div class="job-detail-hero-content">
+
+        <span class="job-detail-label">JOB OPPORTUNITY</span>
+
+        <h1>{{ job.title }}</h1>
+        {% if messages %}
+    {% for message in messages %}
+        <div class="job-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+        <div class="job-detail-quick-info">
+            <span>📍 {{ job.location }}</span>
+            <span>💰 {{ job.salary }}</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- JOB CONTENT -->
+<main class="job-detail-container">
+
+    <div class="job-detail-main">
+
+        <div class="job-detail-card">
+
+            <h2>About This Position</h2>
+
+            <p class="job-detail-description">
+                {{ job.description|linebreaksbr }}
+            </p>
+
+            <div class="job-detail-divider"></div>
+
+            <h2>Job Information</h2>
+
+            <div class="job-detail-info-grid">
+
+                <div>
+                    <span>Job Title</span>
+                    <p>{{ job.title }}</p>
+                </div>
+
+                <div>
+                    <span>Location</span>
+                    <p>{{ job.location }}</p>
+                </div>
+
+                <div>
+                    <span>Salary</span>
+                    <p>{{ job.salary }}</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- APPLY CARD -->
+    <aside class="job-detail-sidebar">
+
+        <div class="job-apply-card">
+
+            <span>READY FOR YOUR NEXT STEP?</span>
+
+            <h2>Interested in this opportunity?</h2>
+
+            <p>
+                Take the next step in your career.
+                Submit your application today.
+            </p>
+
+            <form method="POST" action="{% url 'apply_job' job.id %}">
+
+                {% csrf_token %}
+
+                <button type="submit" class="job-apply-button">
+                    Apply Now →
+                </button>
+
+            </form>
+
+            <a href="{% url 'job_list' %}" class="job-detail-back">
+                ← Back to Jobs
+            </a>
+
+        </div>
+
+    </aside>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="job-detail-footer">
+
+    <h2>hireo<span>.</span></h2>
+
+    <p>Find your place. Build your future.</p>
+
+    <small>© 2026 Hireo. All rights reserved.</small>
+
+</footer>
+
+
+</body>
+</html>

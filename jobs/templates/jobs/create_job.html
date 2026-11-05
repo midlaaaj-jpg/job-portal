@@ -1,0 +1,122 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hireo | Post a Job</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="page-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <span>✦</span> Hireo
+        </div>
+
+        <p class="menu-label">WORKSPACE</p>
+
+        <nav class="sidebar-nav">
+            <a href="{% url 'create_job' %}" class="active">＋ Post a Job</a>
+            <a href="{% url 'company_jobs' %}">▤ My Posted Jobs</a>
+            <a href="{% url 'company_applicants' %}">♙ Applicants</a>
+            <a href="{% url 'create_company_profile' %}">◉ Company Profile</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>Build your team with the right talent.</p>
+            <a href="{% url 'logout' %}" class="logout-btn">↪ Logout</a>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <p class="top-label">COMPANY WORKSPACE</p>
+                <h2>Create Job</h2>
+            </div>
+
+            <div class="user-badge">
+                <span>✦</span>
+                Hireo Employer
+            </div>
+        </header>
+
+
+        <!-- Page Heading -->
+        <section class="page-heading">
+            <div>
+                <p class="eyebrow">FIND YOUR NEXT GREAT EMPLOYEE</p>
+
+                <h1>Post a New <span>Opportunity.</span></h1>
+
+                <p>
+                    Share your opening with talented professionals
+                    and find the perfect person for your team.
+                </p>
+            </div>
+
+            <div class="heading-decoration">✦</div>
+        </section>
+
+
+        <!-- Job Form -->
+        <section class="form-section">
+
+            <div class="form-heading">
+                <div>
+                    <p class="eyebrow">JOB INFORMATION</p>
+                    <h2>Job Details</h2>
+                    <p>Fill in the information below to publish your job opening.</p>
+                </div>
+
+                <span class="form-icon">▤</span>
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="django-form">
+                    {{ form.as_p }}
+                </div>
+
+                <div class="form-actions">
+                    <a href="{% url 'company_jobs' %}" class="cancel-btn">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="publish-btn">
+                        Publish Job <span>↗</span>
+                    </button>
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <footer class="page-footer">
+            <p>© 2026 Hireo. All rights reserved.</p>
+            <p>Connecting talent with opportunity.</p>
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>

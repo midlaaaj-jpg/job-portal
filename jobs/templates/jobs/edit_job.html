@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Job | Hireo</title>
+
+```
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+```
+
+</head>
+
+<body class="edit-job-page">
+
+```
+<div class="edit-job-container">
+
+    <a href="{% url 'company_jobs' %}" class="edit-job-back">
+        ← Back to My Jobs
+    </a>
+
+    <div class="edit-job-card">
+
+        <div class="edit-job-heading">
+            <span>MANAGE YOUR OPPORTUNITY</span>
+            <h1>Edit Job</h1>
+            <p>Update your job information and keep your listing accurate.</p>
+        </div>
+
+        <div class="edit-job-divider"></div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="edit-job-form">
+                {{ form.as_p }}
+            </div>
+
+            <div class="edit-job-actions">
+                <button type="submit" class="edit-job-submit">
+                    Save Changes →
+                </button>
+
+                <a href="{% url 'company_jobs' %}" class="edit-job-cancel">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+```
+
+</body>
+</html>

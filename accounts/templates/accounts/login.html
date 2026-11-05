@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Hireo</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body class="login-page">
+
+    <div class="login-container">
+
+        <div class="login-brand">
+            <a href="{% url 'home' %}" class="login-logo">
+                Hire<span>o</span>.
+            </a>
+
+            <p>Welcome back to your career journey.</p>
+        </div>
+
+        <div class="login-card">
+
+            <div class="login-heading">
+                <span class="login-tag">WELCOME BACK</span>
+                <h1>Login to <span>Hireo</span></h1>
+                <p>Enter your details to access your account.</p>
+            </div>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="login-message">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" class="login-form">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="login-button">
+                    Login to Account
+                    <span>→</span>
+                </button>
+            </form>
+
+            <div class="login-register">
+                Don't have an account?
+                <a href="{% url 'register' %}">Create an account</a>
+            </div>
+
+        </div>
+
+        <div class="login-footer">
+            © 2026 Hireo. Find your next opportunity.
+        </div>
+
+    </div>
+
+</body>
+</html>

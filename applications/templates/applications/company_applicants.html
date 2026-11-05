@@ -1,0 +1,215 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hireo | Applicants</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<div class="applicants-layout">
+
+    <!-- Sidebar -->
+    <aside class="applicants-sidebar">
+
+        <div class="applicants-logo">
+            <span>✦</span> Hireo
+        </div>
+
+        <p class="applicants-menu-label">WORKSPACE</p>
+
+        <nav class="applicants-nav">
+            <a href="{% url 'create_job' %}">＋ Post a Job</a>
+            <a href="{% url 'company_jobs' %}">▤ My Posted Jobs</a>
+            <a href="{% url 'company_applicants' %}" class="active">♙ Applicants</a>
+            <a href="{% url 'create_company_profile' %}">◉ Company Profile</a>
+        </nav>
+
+        <div class="applicants-sidebar-bottom">
+            <p>Discover talented people and build your dream team.</p>
+            <a href="{% url 'logout' %}">↪ Logout</a>
+        </div>
+
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="applicants-main">
+
+        <header class="applicants-topbar">
+
+            <div>
+                <p>COMPANY WORKSPACE</p>
+                <h2>Applicants</h2>
+            </div>
+
+            <div class="applicants-badge">
+                ✦ Hireo Employer
+            </div>
+
+        </header>
+
+
+        <!-- Hero Section -->
+        <section class="applicants-hero">
+
+            <div>
+                <p class="applicants-eyebrow">TALENT MANAGEMENT</p>
+
+                <h1>Meet Your Next <span>Great Talent.</span></h1>
+
+                <p>
+                    Explore candidates, review their skills and
+                    manage applications to find the perfect
+                    match for your company.
+                </p>
+            </div>
+
+            <div class="applicants-hero-icon">♙</div>
+
+        </section>
+
+
+        <!-- Applicants Section -->
+        <section class="applicants-section">
+
+            <div class="applicants-section-heading">
+                <div>
+                    <p>CANDIDATE MANAGEMENT</p>
+                    <h2>All Applicants</h2>
+                    <span>Review and manage applications received for your jobs.</span>
+                </div>
+            </div>
+
+
+            <div class="applicants-list">
+
+                {% for application in applications %}
+
+                    <article class="applicant-card">
+
+                        <!-- Applicant Header -->
+                        <div class="applicant-header">
+
+                            <div class="applicant-avatar">
+                                {{ application.employee.full_name|first|upper }}
+                            </div>
+
+                            <div class="applicant-info">
+                                <h3>{{ application.employee.full_name }}</h3>
+
+                                <p>
+                                    {{ application.employee.location }}
+                                </p>
+                            </div>
+
+                            <span class="applicant-status">
+                                {{ application.status }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- Job Information -->
+                        <div class="applicant-job-info">
+
+                            <div>
+                                <span>APPLIED FOR</span>
+                                <strong>{{ application.job.title }}</strong>
+                            </div>
+
+                            <div>
+                                <span>LOCATION</span>
+                                <strong>{{ application.employee.location }}</strong>
+                            </div>
+
+                        </div>
+
+
+                        <!-- Skills -->
+                        <div class="applicant-skills">
+
+                            <span>SKILLS</span>
+
+                            <p>{{ application.employee.skills|default:"Not provided" }}</p>
+
+                        </div>
+
+
+                        <!-- Actions -->
+                        <div class="applicant-actions">
+
+                            <a href="{% url 'applicant_detail' application.id %}"
+                               class="view-applicant-btn">
+                                View Applicant Details ↗
+                            </a>
+
+
+                            <form method="POST"
+                                  action="{% url 'update_application_status' application.id %}">
+
+                                {% csrf_token %}
+
+                                <select name="status">
+
+                                    <option value="pending">Pending</option>
+                                    <option value="shortlisted">Shortlisted</option>
+                                    <option value="rejected">Rejected</option>
+                                    <option value="hired">Hired</option>
+
+                                </select>
+
+                                <button type="submit" class="update-status-btn">
+                                    Update Status
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </article>
+
+                {% empty %}
+
+                    <div class="applicants-empty">
+
+                        <div class="applicants-empty-icon">♙</div>
+
+                        <h2>No Applicants Yet</h2>
+
+                        <p>
+                            You haven't received any applications yet.
+                            Keep your job openings active to attract talented candidates.
+                        </p>
+
+                        <a href="{% url 'company_jobs' %}">
+                            View My Jobs
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="applicants-footer">
+            <p>© 2026 Hireo. All rights reserved.</p>
+            <p>Connecting talent with opportunity.</p>
+        </footer>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Company Profile | Hireo</title>
+
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body class="company-profile-page">
+
+
+<div class="company-profile-container">
+
+    <a href="{% url 'company_dashboard' %}" class="company-profile-back">
+        ← Back to Dashboard
+    </a>
+
+    <div class="company-profile-card">
+
+        <div class="company-profile-heading">
+            <span>BUILD YOUR BRAND</span>
+            <h1>Create Company Profile</h1>
+            <p>Introduce your company to talented professionals.</p>
+        </div>
+
+        <div class="company-profile-divider"></div>
+
+        <form method="POST" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <div class="company-profile-form">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="company-profile-submit">
+                Save Company Profile →
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

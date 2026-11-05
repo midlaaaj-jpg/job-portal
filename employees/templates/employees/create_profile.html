@@ -1,0 +1,106 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Create Profile | Hireo</title>
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body class="employee-profile-page">
+
+
+<!-- NAVBAR -->
+<nav class="employee-profile-navbar">
+
+    <a href="{% url 'home' %}" class="employee-profile-logo">
+        hireo<span>.</span>
+    </a>
+
+    <div>
+        <a href="{% url 'employee_dashboard' %}">Dashboard</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
+</nav>
+
+
+<!-- PAGE HEADER -->
+<section class="employee-profile-hero">
+
+    <span>BUILD YOUR PROFESSIONAL IDENTITY</span>
+
+    <h1>Create Your Profile</h1>
+
+    <p>
+        Tell companies about yourself, your skills and your experience.
+        Make your next career opportunity easier to find.
+    </p>
+
+</section>
+
+
+<!-- PROFILE FORM -->
+<main class="employee-profile-container">
+
+    <div class="employee-profile-heading">
+
+        <div class="employee-profile-icon">
+            👤
+        </div>
+
+        <div>
+            <h2>Personal Information</h2>
+            <p>Complete your details to create your professional profile.</p>
+        </div>
+
+    </div>
+
+
+    <form method="POST" enctype="multipart/form-data" class="employee-profile-form">
+
+        {% csrf_token %}
+
+        <div class="employee-profile-fields">
+            {{ form.as_p }}
+        </div>
+
+        <div class="employee-profile-actions">
+
+            <a href="{% url 'employee_dashboard' %}">
+                Cancel
+            </a>
+
+            <button type="submit">
+                Save Profile →
+            </button>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="employee-profile-footer">
+
+    <h2>hireo<span>.</span></h2>
+
+    <p>Find your place. Build your future.</p>
+
+    <small>© 2026 Hireo. All rights reserved.</small>
+
+</footer>
+
+
+</body>
+</html>
