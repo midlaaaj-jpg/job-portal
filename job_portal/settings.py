@@ -26,8 +26,11 @@ SECRET_KEY = 'django-insecure-ofq5$%thi3c4#=td=m_!h()1cpw$(y#qt%^eq(ocf5uo-9z1_s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    'job-portal-gxza.vercel.app',
+    'localhost',
+    '127.0.0.1',
+]
 
 # Application definition
 
